@@ -1,5 +1,11 @@
+/**
+ * @uthor: Atul Srivastav
+ * @created on: 31-Dec-2021
+ * Address Book
+ */
 package com.addressbook;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class AllContacts {
@@ -9,7 +15,7 @@ class AllContacts {
 
 
 	  //constructor
-	  Contact(String firstName, String lastName, String address, String city, String state, int zip, String phoneNum, String email)
+	  AllContacts(String firstName, String lastName, String address, String city, String state, int zip, String phoneNum, String email)
 	  {
 	      this.firstName = firstName;
 	      this.lastName = lastName;
@@ -29,6 +35,7 @@ public class AddressBooks {
         //welcome message
         System.out.println("Welcome to Address Book Program!!!");
         //initialize variable
+        ArrayList<AllContacts> myAddressBook = new ArrayList<AllContacts>();
         Scanner sc=new Scanner(System.in);
         String firstName, lastName, address, city, state, email,phoneNum;
         int zip;
@@ -52,6 +59,7 @@ public class AddressBooks {
         phoneNum = sc.next();
         //creating contact
         AllContacts allContacts = new AllContacts(firstName, lastName, address, city, state, zip, phoneNum, email);
+        myAddressBook.add(allContacts);
         System.out.println("A new contact is created.");
     }
 }
