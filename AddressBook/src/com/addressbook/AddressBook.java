@@ -9,14 +9,14 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 /*
 * Address Book class to perform all the functionalities of address book.
 * */
 public class AddressBook {
     //instance variable declaration
     public static ArrayList<AllContacts> myAddressBook = new ArrayList<AllContacts>();
-    public static final Scanner sc = new Scanner(System.in);
+    //making object of Scanner classs
+    public static Scanner sc = new Scanner(System.in);
 
     /**
      * Cheks if address book is not empty.
@@ -115,7 +115,9 @@ public class AddressBook {
                             "\n3. State " +
                             "\n4. Zip " +
                             "\n5. Phone Number " +
-                            "\n6. Email");
+                            "\n6. Email" +
+                            "\n7. First Name" +
+                            "\n8. Last Name");
                     option = sc.nextInt();
                     switch (option)
                     {
@@ -155,6 +157,18 @@ public class AddressBook {
                             myAddressBook.get(i).email = newVal;
                             System.out.println("Email Updated Successfully!!!");
                             break;
+                        case 7:
+                            System.out.println("Previous First Name:" + myAddressBook.get(i).firstName + "\nEnter new value: ");
+                            newVal = sc.next();
+                            myAddressBook.get(i).firstName = newVal;
+                            System.out.println("First Name Updated Successfully!!!");
+                            break;
+                        case 8:
+                            System.out.println("Previous Last Name:" + myAddressBook.get(i).lastName + "\nEnter new value: ");
+                            newVal = sc.next();
+                            myAddressBook.get(i).lastName = newVal;
+                            System.out.println("Last Name Updated Successfully!!!");
+                            break;
                         default:
                             System.out.println("Invalid Input!!!.");
                     }
@@ -185,7 +199,7 @@ public class AddressBook {
             int i;
             int flag=0;
             //taking phone number to checkif user exists.
-            System.out.println("Enter the phone number to delete thr user: ");
+            System.out.println("Enter the phone number to delete the user: ");
             phone = sc.next();
             for (i = 0; i < myAddressBook.size(); i++)
             {
@@ -235,7 +249,7 @@ public class AddressBook {
                         System.out.println("Thank You! ");
                         System.exit(0);
                 default:
-                        System.out.println("Enter a valid entery");
+                        System.out.println("Enter a valid entry");
             }
         }
     }
