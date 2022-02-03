@@ -5,37 +5,45 @@
  */
 package com.addressbook;
 
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
 
 /*
 * Address Book class to perform all the functionalities of address book.
 * */
 public class AddressBook {
     //instance variable declaration
-    public static ArrayList<AllContacts> myAddressBook = new ArrayList<AllContacts>();
+    private String name;
+    public static ArrayList<Contacts> myAddressBook = new ArrayList<Contacts>();
     //making object of Scanner classs
     public static Scanner sc = new Scanner(System.in);
 
-    /**
-     * Cheks if address book is not empty.
-     * method to display user details from address book
-     */
+    public AddressBook(String name) {
+        this.myAddressBook = new ArrayList<Contacts>();
+        this.name = name;
+    }
+
+
+        /**
+         * Cheks if address book is not empty.
+         * method to display user details from address book
+         */
     public static void displayContacts()
     {
         if (myAddressBook.size() > 0)
         {
             for (int i = 0; i < myAddressBook.size(); i++)
             {
-                System.out.println("\n"+"FirstName:"+myAddressBook.get(i).firstName+
-                        "\n"+"LastName:"+myAddressBook.get(i).lastName +
-                        "\n"+"Address:"+myAddressBook.get(i).address +
-                        "\n"+"City:"+myAddressBook.get(i).city +
-                        "\n"+"State:"+myAddressBook.get(i).state +
-                        "\n"+"Zip:"+myAddressBook.get(i).zip +
-                        "\n"+"Phone:"+myAddressBook.get(i).phoneNum +
-                        "\n"+"Email:"+myAddressBook.get(i).email);
+                System.out.println("\n"+"FirstName:"+ myAddressBook.get(i).getFirstName() +
+                        "\n"+"LastName:"+ myAddressBook.get(i).getLastName() +
+                        "\n"+"Address:"+ myAddressBook.get(i).getAddress() +
+                        "\n"+"City:"+ myAddressBook.get(i).getCity() +
+                        "\n"+"State:"+ myAddressBook.get(i).getState() +
+                        "\n"+"Zip:"+ myAddressBook.get(i).getZip() +
+                        "\n"+"Phone:"+ myAddressBook.get(i).getPhoneNum() +
+                        "\n"+"Email:"+ myAddressBook.get(i).getEmail());
                 System.out.println();
             }
         }
@@ -84,7 +92,7 @@ public class AddressBook {
         email = sc.next();
         System.out.println("Enter the phone number:");
         phoneNum = sc.next();
-        AllContacts allContacts = new AllContacts(firstName, lastName, address, city, state, zip, phoneNum, email);
+        Contacts allContacts = new Contacts(firstName, lastName, address, city, state, zip, phoneNum, email);
         myAddressBook.add(allContacts);
         System.out.println("A new contact is created.");
     }
@@ -107,7 +115,7 @@ public class AddressBook {
             num = sc.next();
             for (i = 0; i < myAddressBook.size(); i++)
             {
-                if (myAddressBook.get(i).phoneNum.equalsIgnoreCase(num))
+                if (myAddressBook.get(i).getPhoneNum().equalsIgnoreCase(num))
                 {
                     System.out.println("Enter the option to edit: " +
                             "\n1. Address " +
@@ -122,51 +130,51 @@ public class AddressBook {
                     switch (option)
                     {
                         case 1:
-                            System.out.println("Previous address:" + myAddressBook.get(i).address + "\nEnter new value: ");
+                            System.out.println("Previous address:" + myAddressBook.get(i).getAddress() + "\nEnter new value: ");
                             newVal = sc.next();// get new value
-                            myAddressBook.get(i).address = newVal;
+                            myAddressBook.get(i).setAddress(newVal);
                             System.out.println("Address Updated Successfully!!!");
                             break;
                         case 2:
-                            System.out.println("Previous City:" + myAddressBook.get(i).city + "\nEnter new value: ");
+                            System.out.println("Previous City:" + myAddressBook.get(i).getCity() + "\nEnter new value: ");
                             newVal = sc.next();
-                            myAddressBook.get(i).city = newVal;
+                            myAddressBook.get(i).setCity(newVal);
                             System.out.println("City Updated Successfully!!!");
                             break;
                         case 3:
-                            System.out.println("Previous State:" + myAddressBook.get(i).state + "\nEnter new value: ");
+                            System.out.println("Previous State:" + myAddressBook.get(i).getState() + "\nEnter new value: ");
                             newVal = sc.next();
-                            myAddressBook.get(i).state = newVal;
+                            myAddressBook.get(i).setState(newVal);
                             System.out.println("State Updated Successfully!!!");
                             break;
                         case 4:
-                            System.out.println("Previous Zip Code:" + myAddressBook.get(i).zip + "\nEnter new value: ");
+                            System.out.println("Previous Zip Code:" + myAddressBook.get(i).getZip() + "\nEnter new value: ");
                             newVal = sc.next();
-                            myAddressBook.get(i).zip = Integer.parseInt(newVal);
+                            myAddressBook.get(i).setZip(Integer.parseInt(newVal));
                             System.out.println("Zip code Updated Successfully!!!");
                             break;
                         case 5:
-                            System.out.println("Previous Phone Num:" + myAddressBook.get(i).phoneNum + "\nEnter new value: ");
+                            System.out.println("Previous Phone Num:" + myAddressBook.get(i).getPhoneNum() + "\nEnter new value: ");
                             newVal = sc.next();
-                            myAddressBook.get(i).phoneNum = newVal;
+                            myAddressBook.get(i).setPhoneNum(newVal);
                             System.out.println("Phone Number Updated Successfully!!!");
                             break;
                         case 6:
-                            System.out.println("Previous Email:" + myAddressBook.get(i).email + "\nEnter new value: ");
+                            System.out.println("Previous Email:" + myAddressBook.get(i).getEmail() + "\nEnter new value: ");
                             newVal = sc.next();
-                            myAddressBook.get(i).email = newVal;
+                            myAddressBook.get(i).setEmail(newVal);
                             System.out.println("Email Updated Successfully!!!");
                             break;
                         case 7:
-                            System.out.println("Previous First Name:" + myAddressBook.get(i).firstName + "\nEnter new value: ");
+                            System.out.println("Previous First Name:" + myAddressBook.get(i).getFirstName() + "\nEnter new value: ");
                             newVal = sc.next();
-                            myAddressBook.get(i).firstName = newVal;
+                            myAddressBook.get(i).setFirstName(newVal);
                             System.out.println("First Name Updated Successfully!!!");
                             break;
                         case 8:
-                            System.out.println("Previous Last Name:" + myAddressBook.get(i).lastName + "\nEnter new value: ");
+                            System.out.println("Previous Last Name:" + myAddressBook.get(i).getLastName() + "\nEnter new value: ");
                             newVal = sc.next();
-                            myAddressBook.get(i).lastName = newVal;
+                            myAddressBook.get(i).setLastName(newVal);
                             System.out.println("Last Name Updated Successfully!!!");
                             break;
                         default:
@@ -204,7 +212,7 @@ public class AddressBook {
             for (i = 0; i < myAddressBook.size(); i++)
             {
                 //if user exists then deleting it and chaning the value of flag.,
-                if (myAddressBook.get(i).phoneNum.equalsIgnoreCase(phone)) {
+                if (myAddressBook.get(i).getPhoneNum().equalsIgnoreCase(phone)) {
                     myAddressBook.remove(i); // delete AllContacts
                     System.out.println("User has been deleted Successfully!");
                     flag=1;
@@ -220,10 +228,15 @@ public class AddressBook {
             System.out.println("No contatcs present. Please add Contacts.");
         }
     }
-    //main method
-    public static void main(String[] args) {
+    //book name getter
+    public String getName() {
+        return name;
+    }
+    
+    //operations method
+    public void operations(AddressBook book) {
         //welcome message
-        System.out.println("Welcome to Address Book");
+        System.out.println("Welcome to Address Book: " + getName());
         //initializing  variable
         int option;
         //loops until user want to quit.
@@ -247,10 +260,11 @@ public class AddressBook {
                         break;// display All Contacts
                 case 5:
                         System.out.println("Thank You! ");
-                        System.exit(0);
+                       return;
                 default:
                         System.out.println("Enter a valid entry");
             }
         }
     }
 }
+
