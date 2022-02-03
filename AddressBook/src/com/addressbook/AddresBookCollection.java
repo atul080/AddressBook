@@ -109,6 +109,46 @@ public class AddresBookCollection {
                 break;
         }
     }
+
+	 /**
+     * Map City with Person
+     * calls map method for each book
+     * creates map
+     * assign to cityDictionary
+     * prints cityDictionary
+     */
+    public static void cityDictionaryMap() {
+        Map<String, List<Contacts>> dictMap = new HashMap<>();
+        for (AddressBook book : addressBookMap.values()) {
+            book.cityMap().forEach((key, value) -> dictMap.merge(key, value,
+                    (city, contact) -> {
+                        city.addAll(contact);
+                        return city;
+                    }));
+        }
+        cityDictionary = dictMap;
+        cityDictionary.forEach(((key, value) -> System.out.println(key + " " + value+"Total Count: "+value.size())));
+    }
+
+    /**
+     * Map State with Person
+     * calls map method for each book
+     * creates map
+     * assign to stateDictionary
+     * prints stateDictionary
+     */
+    public static void stateDictionaryMap() {
+        Map<String, List<Contacts>> dictMap = new HashMap<>();
+        for (AddressBook book : addressBookMap.values()) {
+            book.stateMap().forEach((key, value) -> dictMap.merge(key, value,
+                    (state, contact) -> {
+                        state.addAll(contact);
+                        return state;
+                    }));
+        }
+        stateDictionary = dictMap;
+        stateDictionary.forEach(((key, value) -> System.out.println(key + " " + value+" Total count is: "+value.size())));
+    }
     
     public static void main(String[] args) {
         //welcome message
@@ -130,6 +170,12 @@ public class AddresBookCollection {
                     break;
 				case (4):
                     searchPerson(); // search Person
+                    break;
+				case (5):
+                    cityDictionaryMap(); // person by City
+                    break;
+                case (6):
+                    stateDictionaryMap(); // person by State
                     break;
                 default:
                     System.out.println("Thanks for using Address Book!!!"); // quit book
