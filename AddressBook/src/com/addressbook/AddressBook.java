@@ -259,6 +259,42 @@ public class AddressBook {
         else
             return true;
     }
+
+	 /**
+     * Search person by city
+     * takes city
+     * filter contact for city
+     * if city matches creates a list
+     * print list
+     *
+     * @param city
+     */
+    public void searchPersonByCity(String city) {
+        List<Contacts> streamList;
+        streamList = myAddressBook.stream()
+                .filter(contacts -> city.equals(contacts.getCity())).collect(Collectors.toList());
+        for (Contacts person : streamList) {
+            System.out.println(person.getFirstName() + " " + person.getLastName());
+        }
+    }
+
+    /**
+     * Search person by state
+     * takes state
+     * filter contact for state
+     * if state matches creates a list
+     * print list
+     *
+     * @param state
+     */
+    public void searchPersonByState(String state) {
+        List<Contacts> streamList;
+        streamList = myAddressBook.stream()
+                .filter(contact -> state.equals(contact.getState())).collect(Collectors.toList());
+        for (Contacts person : streamList) {
+            System.out.println(person.getFirstName() + " " + person.getLastName());
+        }
+    }
     
     //operations method
     public void operations(AddressBook book) {

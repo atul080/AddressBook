@@ -77,7 +77,38 @@ public class AddresBookCollection {
             System.out.println("Not Found");
         }
     }
-
+	
+	 /**
+     * search persons by city or state
+     * takes input search on City or State
+     * take name of City/State
+     * iterative calls respective searchPersonBy** method for each book
+     */
+    public static void searchPerson() {
+        System.out.println("Select an operation: \n1. City \n2.State");
+        int option = sc.nextInt();
+        switch (option) {
+            case (1):
+                System.out.println("Enter City to search from: ");
+                sc.nextLine();
+                String city = sc.nextLine();
+                for (AddressBook addressBook : addressBookMap.values()) {
+                    addressBook.searchPersonByCity(city);
+                }
+                break;
+            case (2):
+                System.out.println("Enter State to search from: ");
+                sc.nextLine();
+                String state = sc.nextLine();
+                for (AddressBook addressBook : addressBookMap.values()) {
+                    addressBook.searchPersonByState(state);
+                }
+                break;
+            default:
+                System.out.println("Invalid Input");
+                break;
+        }
+    }
     
     public static void main(String[] args) {
         //welcome message
@@ -96,6 +127,9 @@ public class AddresBookCollection {
                     break;
                 case (3):
                     operateBook(); // operate on book
+                    break;
+				case (4):
+                    searchPerson(); // search Person
                     break;
                 default:
                     System.out.println("Thanks for using Address Book!!!"); // quit book
