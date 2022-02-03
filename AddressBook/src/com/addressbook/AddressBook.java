@@ -92,9 +92,15 @@ public class AddressBook {
         email = sc.next();
         System.out.println("Enter the phone number:");
         phoneNum = sc.next();
-        Contacts allContacts = new Contacts(firstName, lastName, address, city, state, zip, phoneNum, email);
-        myAddressBook.add(allContacts);
-        System.out.println("A new contact is created.");
+		boolean check = personExist(""+firstName+lastName);
+		if(!check)
+        {
+			Contacts allContacts = new Contacts(firstName, lastName, address, city, state, zip, phoneNum, email);
+			myAddressBook.add(allContacts);
+			System.out.println("A new contact is created.");
+		}
+		else
+			System.out.println("Person already exist.");
     }
 
     /**
@@ -231,6 +237,27 @@ public class AddressBook {
     //book name getter
     public String getName() {
         return name;
+    }
+
+	
+    /**
+     * checks if person exists in book
+     * filter contact by combination of first name and last name
+     * finds if contact exits
+     * else return false
+     *
+     * @param searchName
+     * @return boolean
+     */
+    public static boolean personExist(String searchName) {
+        Contact filterStream =
+                myAddressBook.stream()
+                        .filter(contacts -> searchName.equals(contacts.getFirstName() + contacts.getLastName())).findAny()
+                        .orElse(null);
+        if (filterStream == null)
+            return false;
+        else
+            return true;
     }
     
     //operations method
