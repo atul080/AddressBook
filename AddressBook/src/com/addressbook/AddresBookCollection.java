@@ -150,6 +150,20 @@ public class AddresBookCollection {
         stateDictionary.forEach(((key, value) -> System.out.println(key + " " + value+" Total count is: "+value.size())));
     }
     
+ /**
+     * Sorts Contacts
+     * input parameter to sort upon Name
+     * iterate for each book
+     * call sort method with parameter
+     */
+    public static void sort() {
+					for (AddressBook book : addressBookMap.values()) 
+					{
+						book.sort("name");
+					}
+				}
+                
+
     public static void main(String[] args) {
         //welcome message
         System.out.println("Welcome to Address Book Program!!!");
@@ -177,7 +191,10 @@ public class AddresBookCollection {
                 case (6):
                     stateDictionaryMap(); // person by State
                     break;
-                default:
+				case (7):
+                    sort();// sort by person name
+                    break;
+	            default:
                     System.out.println("Thanks for using Address Book!!!"); // quit book
                     exit(0);
                     break;
