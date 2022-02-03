@@ -296,9 +296,9 @@ public class AddressBook {
         }
     }
 
-/**
+ /**
      * Prints sorted contact for each book
-     * take sortBy to check basis of sorting name.
+     * take sortBy to check basis of sorting(Name,City,State,Zip)
      * print current address book
      * call sorted method to sort and collects list
      * print list
@@ -308,12 +308,31 @@ public class AddressBook {
     public void sort(String sortBy) {
         List<Contacts> sortContact = new ArrayList<Contacts>();
         System.out.println("\nFor book: " + getName() + "sorted by " + sortBy);
-        sortContact = myAddressBook.stream().sorted(Comparator.comparing(Contacts::getFirstName)).collect(Collectors.toList());
-		for (Contacts contact : sortContact) {
+        switch (sortBy) {
+            case ("name"):
+                sortContact =
+                        myAddressBook.stream().sorted(Comparator.comparing(Contacts::getFirstName))
+                                .collect(Collectors.toList());
+                break;
+            case ("city"):
+                sortContact =
+                        myAddressBook.stream().sorted(Comparator.comparing(Contacts::getCity))
+                                .collect(Collectors.toList());
+                break;
+            case ("state"):
+                sortContact =
+                        myAddressBook.stream().sorted(Comparator.comparing(Contacts::getState))
+                                .collect(Collectors.toList());
+                break;
+            case ("zip"):
+                sortContact =
+                        myAddressBook.stream().sorted(Comparator.comparing(Contacts::getZip)).collect(Collectors.toList());
+                break;
+        }
+        for (Contacts contact : sortContact) {
             System.out.println(contact);
         }
-	}
-
+    }
     
     //operations method
     public void operations(AddressBook book) {

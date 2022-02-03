@@ -150,18 +150,41 @@ public class AddresBookCollection {
         stateDictionary.forEach(((key, value) -> System.out.println(key + " " + value+" Total count is: "+value.size())));
     }
     
- /**
+  /**
      * Sorts Contacts
-     * input parameter to sort upon Name
+     * input parameter to sort upon Name,City,State,Zip
      * iterate for each book
      * call sort method with parameter
      */
     public static void sort() {
-					for (AddressBook book : addressBookMap.values()) 
-					{
-						book.sort("name");
-					}
-				}
+        System.out.println("Select option to sort");
+        System.out.println("Select an operation: \n1- by Name\n2- by City\n3- by State \n4- by Zip");
+        int option = sc.nextInt();
+        switch (option) {
+            case (1):
+                for (AddressBook book : addressBookMap.values()) {
+                    book.sort("name");
+                }
+                break;
+            case (2):
+                for (AddressBook book : addressBookMap.values()) {
+                    book.sort("city");
+                }
+                break;
+            case (3):
+                for (AddressBook book : addressBookMap.values()) {
+                    book.sort("state");
+                }
+                break;
+            case (4):
+                for (AddressBook book : addressBookMap.values()) {
+                    book.sort("zip");
+                }
+                break;
+            default:
+                System.out.println("Invalid Input");
+        }
+    }
                 
 
     public static void main(String[] args) {
